@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import HeroForm from "@/components/forms/HeroForm";
 
 export default function Home() {
   return (
@@ -12,13 +12,7 @@ export default function Home() {
             Share your links, music, social profile, and info
           </h2>
         </div>
-        <form className="inline-flex gap items-center shadow shadow-gray-700/20">
-          <span className="bg-white py-4 pl-4">Linklist.to/</span>
-          <input type="text" placeholder="username" className="py-4" />
-          <button type="submit" className="bg-blue-500 text-white py-4 px-6">
-            join for free
-          </button>
-        </form>
+        <HeroForm />
       </section>
     </main>
   );

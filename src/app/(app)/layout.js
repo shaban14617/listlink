@@ -1,21 +1,13 @@
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "../globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChartLine,
-  faFileLines,
-  faHome,
-} from "@fortawesome/free-solid-svg-icons";
-import LogoutButton from "@/components/buttons/LogoutButton";
 import { headers } from "next/headers";
 import AppSidebar from "@/components/layout/AppSidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata = {
   title: "Create Next App",

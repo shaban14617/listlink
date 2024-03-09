@@ -1,7 +1,6 @@
-import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function RadioTogglers({ options, selected, onChange }) {
+function RadioTogglers({ options }) {
   return (
     <div className="radio-togglers shadow">
       {options.map((option) => (

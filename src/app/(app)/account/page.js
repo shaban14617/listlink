@@ -17,7 +17,7 @@ async function AccountPage({ searchParams, ...rest }) {
   const page = await Page.findOne({ owner: session?.user?.email });
 
   if (page) {
-    return <PageSettingsForm page={page} />;
+    return <PageSettingsForm page={page} user={session.user} />;
   }
 
   return (

@@ -6,9 +6,9 @@ function SubmitButton({ children }) {
     <button
       disabled={pending}
       type="submit"
-      className="bg-blue-500 disabled:bg-blue-200 disabled:text-gray-200 text-white py-2 px-4 flex mx-auto w-full items-center gap-2 justify-center"
+      className="bg-blue-500 disabled:bg-blue-300 disabled:text-white text-white py-2 px-4 flex mx-auto w-full items-center gap-2 justify-center"
     >
-      {children}
+      {pending ? <span>Saving...</span> : children}
     </button>
   );
 }

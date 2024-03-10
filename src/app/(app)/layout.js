@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { headers } from "next/headers";
 import AppSidebar from "@/components/layout/AppSidebar";
+import { Toaster } from "react-hot-toast";
 
 const inter = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -26,6 +27,7 @@ export default async function AppLayout({ children, ...rest }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster />
         <main className="flex min-h-screen">
           <aside className="bg-white w-48 p-4 shadow-md">
             <div className="rounded-full overflow-hidden w-24 mx-auto">

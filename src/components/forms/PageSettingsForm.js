@@ -5,23 +5,45 @@ import RadioTogglers from "../formItems/RadioTogglers";
 import Image from "next/image";
 import SubmitButton from "../buttons/SubmitButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { savePageSettings } from "@/actions/pageActions";
+import toast from "react-hot-toast";
 
 function PageSettingsForm({ page, user }) {
-  function saveBaseSettings(formData) {
-    console.log(formData.get("displayName"));
+  async function saveBaseSettings(formData) {
+    const result = await savePageSettings(formData);
+    if (result) {
+      toast.success("Saved!");
+    }
   }
 
   return (
     <div className="-m-4">
       <form action={saveBaseSettings}>
-        <div className="bg-gray-300 py-16 flex justify-center items-center">
-          <RadioTogglers
-            options={[
-              { value: "color", icon: faPalette, label: "Color" },
-              { value: "image", icon: faImage, label: "Image" },
-            ]}
-            onChange={() => {}}
-          />
+        <div
+          style={{ backgroundColor: page.bgColor }}
+          className="py-16 flex justify-center items-center"
+        >
+          <div>
+            <RadioTogglers
+              defaultValue={page.bgType}
+              options={[
+                { value: "color", icon: faPalette, label: "Color" },
+                { value: "image", icon: faImage, label: "Image" },
+              ]}
+            />
+            <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
+              {page.bgType === "color" && (
+                <div className="flex justify-center gap-2">
+                  <span>Background color:</span>
+                  <input
+                    type="color"
+                    name="bgColor"
+                    defaultValue={page.bgColor}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
         <div className="flex justify-center -mb-12">
           <Image

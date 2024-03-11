@@ -7,12 +7,30 @@ import SubmitButton from "../buttons/SubmitButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { savePageSettings } from "@/actions/pageActions";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 function PageSettingsForm({ page, user }) {
+  const [bgType, setBgType] = useState(page.bgType);
+  const [bgColor, setBgColor] = useState(page.bgColor);
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
     if (result) {
       toast.success("Saved!");
+    }
+  }
+  function handleFileChange(ev) {
+    const file = ev.target.files?.[0];
+    if (file) {
+      const data = new FormData();
+      data.set("file", file);
+      fetch("api/upload", {
+        method: "POST",
+        body: data,
+      }).then((response) => {
+        response.json().then((link) => {
+          console.log(link);
+        });
+      });
     }
   }
 
@@ -20,29 +38,44 @@ function PageSettingsForm({ page, user }) {
     <div className="-m-4">
       <form action={saveBaseSettings}>
         <div
-          style={{ backgroundColor: page.bgColor }}
+          style={{ backgroundColor: bgColor }}
           className="py-16 flex justify-center items-center"
         >
           <div>
             <RadioTogglers
-              defaultValue={page.bgType}
+              defaultValue={bgType}
               options={[
                 { value: "color", icon: faPalette, label: "Color" },
                 { value: "image", icon: faImage, label: "Image" },
               ]}
+              onChange={(val) => setBgType(val)}
             />
-            <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
-              {page.bgType === "color" && (
+
+            {bgType === "color" && (
+              <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
                 <div className="flex justify-center gap-2">
                   <span>Background color:</span>
                   <input
+                    onChange={(ev) => setBgColor(ev.target.value)}
                     type="color"
                     name="bgColor"
                     defaultValue={page.bgColor}
                   />
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+            {bgType === "image" && (
+              <div className="flex justify-center">
+                <label className="bg-white shadow px-4 py-2 mt-2">
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  Change image
+                </label>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex justify-center -mb-12">

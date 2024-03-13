@@ -17,7 +17,7 @@ function AppSidebar() {
   const path = usePathname();
 
   return (
-    <nav className=" inline-flex flex-col text-center mt-12 gap-6 text-gray-500">
+    <nav className=" inline-flex flex-col text-center mt-8 gap-5 text-gray-500">
       <Link
         href={"/account"}
         className={

@@ -29,7 +29,7 @@ export default async function AppLayout({ children, ...rest }) {
       <body className={inter.className}>
         <Toaster />
         <main className="flex min-h-screen">
-          <aside className="bg-white w-48 p-4 shadow-md">
+          <aside className="bg-white w-48 p-4 pt-8 shadow-md">
             <div className="rounded-full overflow-hidden w-24 mx-auto">
               <Image
                 alt="profile image"
@@ -42,9 +42,7 @@ export default async function AppLayout({ children, ...rest }) {
               <AppSidebar />
             </div>
           </aside>
-          <div className="grow">
-            <div className="bg-white m-8 p-4 shadow ">{children}</div>
-          </div>
+          <div className="grow">{children}</div>
         </main>
       </body>
     </html>

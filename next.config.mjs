@@ -5,6 +5,9 @@ const nextConfig = {
       {
         hostname: "*googleusercontent.com",
       },
+      {
+        hostname: "linklistowner.s3.amazonaws.com",
+      },
     ],
   },
 };

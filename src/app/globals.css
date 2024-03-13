@@ -19,7 +19,7 @@ label.input-label {
 }
 
 .radio-togglers div {
-  @apply p-2 px-4 text-gray-500 flex items-center gap-2;
+  @apply p-2 px-4 text-gray-500 flex items-center gap-2 cursor-pointer;
 }
 
 .radio-togglers input[type="radio"] {

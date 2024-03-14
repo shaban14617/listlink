@@ -77,7 +77,7 @@ function PageSettingsForm({ page, user }) {
                 ? { backgroundColor: bgColor }
                 : { backgroundImage: `url(${bgImage})` }
             }
-            className="py-4 flex justify-center items-center bg-cover bg-center min-h-[250px]"
+            className="py-4 -m-4 flex justify-center items-center bg-cover bg-center min-h-[250px]"
           >
             <div>
               <RadioTogglers
@@ -158,7 +158,7 @@ function PageSettingsForm({ page, user }) {
               defaultValue={page.displayName}
               type="text"
               id="nameIn"
-              placeholder="Ahmed Shabaan"
+              placeholder="Ahmed Shaaban"
             />
             <label className="input-label" htmlFor="locIn">
               Location

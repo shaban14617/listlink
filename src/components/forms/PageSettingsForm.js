@@ -16,6 +16,7 @@ import { savePageSettings } from "@/actions/pageActions";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import SectionBox from "../layout/SectionBox";
+import upload from "@/libs/upload";
 
 function PageSettingsForm({ page, user }) {
   const [bgType, setBgType] = useState(page.bgType);
@@ -28,34 +29,7 @@ function PageSettingsForm({ page, user }) {
       toast.success("Saved!");
     }
   }
-  async function upload(ev, callbackFn) {
-    const uploadPromise = new Promise((resolve, reject) => {
-      const file = ev.target.files?.[0];
 
-      if (file) {
-        const data = new FormData();
-        data.set("file", file);
-        fetch("api/upload", {
-          method: "POST",
-          body: data,
-        }).then((response) => {
-          if (response.ok) {
-            response.json().then((link) => {
-              callbackFn(link);
-              resolve(link);
-            });
-          } else {
-            reject();
-          }
-        });
-      }
-    });
-    await toast.promise(uploadPromise, {
-      loading: "Uploading...",
-      success: "Uploaded successfully!",
-      error: "Upload Error!",
-    });
-  }
   async function handleCoverImageChange(ev) {
     await upload(ev, (link) => {
       setBgImage(link);

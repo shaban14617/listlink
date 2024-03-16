@@ -106,14 +106,18 @@ function PageButtonForm({ user, page }) {
     <SectionBox>
       <form action={saveButtons}>
         <h2 className="text-2xl font-bold mb-4">Buttons</h2>
-        <ReactSortable list={activeButtons} setList={setActiveButtons}>
+        <ReactSortable
+          handle=".handle"
+          list={activeButtons}
+          setList={setActiveButtons}
+        >
           {activeButtons.map((b) => {
             return (
-              <div className="mb-4 flex items-center" key={b.label}>
-                <div className="w-48 flex p-2 gap-2 items-center text-gray-700">
+              <div className=" mb-4 flex items-center" key={b.label}>
+                <div className=" w-56 flex p-2 gap-2 items-center text-gray-700">
                   <FontAwesomeIcon
                     icon={faGripLines}
-                    className="cursor-pointer text-gray-400 pr-2"
+                    className="handle cursor-grab text-gray-400 pr-2"
                   />
                   <FontAwesomeIcon icon={b.icon} />
                   <span>{upperFirst(b.label)}:</span>

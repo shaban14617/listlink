@@ -18,7 +18,6 @@ export const metadata = {
 export default async function AppLayout({ children, ...rest }) {
   const headerList = headers();
   const url = headerList.get("");
-  console.log(url);
   const session = await getServerSession(authOptions);
 
   if (!session) {

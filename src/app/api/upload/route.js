@@ -36,7 +36,6 @@ export async function POST(req) {
     );
 
     const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
-    console.log(newFilename);
     return Response.json(link);
   }
 }

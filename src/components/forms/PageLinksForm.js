@@ -7,19 +7,21 @@ import {
   faLink,
   faPlus,
   faSave,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import SubmitButton from "../buttons/SubmitButton";
 import { useState } from "react";
-import { faLine } from "@fortawesome/free-brands-svg-icons";
 import { ReactSortable } from "react-sortablejs";
 import upload from "@/libs/upload";
 import Image from "next/image";
 import { savePageLinks } from "@/actions/pageActions";
+import toast from "react-hot-toast";
 
 function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
   async function save() {
     await savePageLinks(links);
+    toast.success("Links Saved!");
   }
   function addNewLink() {
     setLinks((prev) => {
@@ -74,13 +76,13 @@ function PageLinksForm({ page, user }) {
           <span>Add link</span>
         </button>
         <div className="">
-          <ReactSortable list={links} setList={setLinks}>
+          <ReactSortable handle=".handle" list={links} setList={setLinks}>
             {links.map((l) => {
               return (
                 <div key={l.key} className="mt-8 flex gap-2 items-center">
-                  <div className="cursor-grab">
+                  <div className="cursor-grab handle">
                     <FontAwesomeIcon
-                      className="text-gray-700 mr-2"
+                      className="text-gray-500 mr-2 cursor-grabbing"
                       icon={faGripLines}
                     />
                   </div>
@@ -136,6 +138,9 @@ function PageLinksForm({ page, user }) {
                       type="text"
                       placeholder="url"
                     />
+                  </div>
+                  <div type="button" className="">
+                    <FontAwesomeIcon icon={faTrash} />
                   </div>
                 </div>
               );

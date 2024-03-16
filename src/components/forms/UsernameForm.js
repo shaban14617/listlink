@@ -10,8 +10,6 @@ function UsernameForm({ desiredUsername }) {
   const [taken, setTaken] = useState(false);
   async function handleSubmit(formData) {
     const result = await grabUsername(formData);
-    console.log(formData);
-    console.log(result);
     setTaken(result === false);
     if (result) {
       redirect("/account?created=" + formData.get("username"));

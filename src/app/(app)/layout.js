@@ -7,6 +7,11 @@ import Image from "next/image";
 import { headers } from "next/headers";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { Toaster } from "react-hot-toast";
+import { Page } from "@/models/Page";
+import mongoose from "mongoose";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const inter = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -17,28 +22,49 @@ export const metadata = {
 
 export default async function AppLayout({ children, ...rest }) {
   const headerList = headers();
-  const url = headerList.get("");
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return redirect("/");
   }
+  mongoose.connect(process.env.MONGODB_URI);
+  const page = await Page.findOne({ owner: session.user.email });
   return (
     <html lang="en">
       <body className={inter.className}>
         <Toaster />
         <main className="flex min-h-screen">
-          <aside className="bg-white w-48 p-4 pt-8 shadow-md">
-            <div className="rounded-full overflow-hidden w-24 mx-auto">
-              <Image
-                alt="profile image"
-                src={session.user.image}
-                height={256}
-                width={256}
-              />
-            </div>
-            <div className="text-center">
-              <AppSidebar />
+          <aside className=" bg-white w-48 p-4 pt-6 shadow-md">
+            <div className="sticky top-0 pt-2">
+              <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto">
+                <Image
+                  src={session.user.image}
+                  width={256}
+                  height={256}
+                  alt={"avatar"}
+                />
+              </div>
+              <div>
+                {page && (
+                  <Link
+                    target="_blank"
+                    href={"/" + page.uri}
+                    className=" text-center mt-4 flex gap-2 items-center justify-center"
+                  >
+                    <FontAwesomeIcon
+                      size="lg "
+                      className="text-blue-500"
+                      icon={faLink}
+                    />
+                    <span className="text-lg text-gray-500">/</span>
+                    <span className="font-bold">{page.uri}</span>
+                  </Link>
+                )}
+              </div>
+
+              <div className="text-center">
+                <AppSidebar />
+              </div>
             </div>
           </aside>
           <div className="grow">{children}</div>

@@ -24,10 +24,11 @@ import { savePageButtons } from "@/actions/pageActions";
 import toast from "react-hot-toast";
 import PageSettingsForm from "./PageSettingsForm";
 import { ReactSortable } from "react-sortablejs";
-const allButtons = [
+
+export const allButtons = [
   {
-    key: "e-mail",
-    label: "e-mail",
+    key: "email",
+    label: "email",
     icon: faEnvelope,
     placeholder: "example@gmail.com",
   },

@@ -100,8 +100,9 @@ async function UserPage({ params }) {
       <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6 p-4">
         {page.links.map((link) => (
           <Link
-            ping={process.env.URL + "api/click?"}
+            ping={process.env.URL + "api/click?url=" + btoa(link.url)}
             href={link.url}
+            target="_blank"
             className="bg-indigo-800 flex p-2"
             key={link.subtitle}
           >

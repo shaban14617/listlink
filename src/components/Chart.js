@@ -27,8 +27,6 @@ function Chart({ data }) {
     if (date && nextDate) {
       const daysBetween = differenceInDays(parseISO(nextDate), parseISO(date));
       if (daysBetween > 0) {
-        console.log("date start", date);
-
         for (let i = 1; i < daysBetween; i++) {
           const dateBetween = formatISO9075(addDays(parseISO(date), i)).split(
             " "

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 async function Analyticspage() {
+  mongoose.connect(process.env.MONGODB_URI);
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -18,7 +19,6 @@ async function Analyticspage() {
   }
   const page = await Page.findOne({ owner: session.user.email });
 
-  mongoose.connect(process.env.MONGODB_URI);
   const viewsCount = await Event.countDocuments({
     type: "view",
     uri: page.uri,
@@ -90,14 +90,31 @@ async function Analyticspage() {
                 {link.url}
               </a>
             </div>
-            <div>
-              today:{" "}
-              {
-                clicks.filter((c) => c.uri === link.uri && isToday(c.createdAt))
-                  .length
-              }{" "}
-              <br />
-              all time:{clicks.filter((c) => c.uri === link.uri).length}
+            <div className="text-center flex gap-3 ">
+              <div className="border rounded-md">
+                <div className="px-6 py-2">
+                  <div className="text-xs font-bold uppercase text-gray-400">
+                    today
+                  </div>
+                  <div className="mt-2 p-2 text-3xl font-bold">
+                    {
+                      clicks.filter(
+                        (c) => c.uri === link.url && isToday(c.createdAt)
+                      ).length
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="border rounded-md">
+              <div className="text-center px-4 py-2">
+                <div className="text-xs font-bold uppercase text-gray-400">
+                  all time
+                </div>
+                <div className="mt-2 p-2 text-3xl font-bold">
+                  {clicks.filter((c) => c.uri === link.url).length}
+                </div>
+              </div>
             </div>
           </div>
         ))}

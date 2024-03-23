@@ -41,7 +41,7 @@ async function UserPage({ params }) {
   const page = await Page.findOne({ uri });
   const user = await User.findOne({ email: page.owner });
 
-  await Event.create({ uri: uri, type: "view" });
+  await Event.create({ uri: uri, page: page.uri, type: "view" });
 
   function buttonLink(key, value) {
     if (key === "mobile") {
@@ -100,7 +100,13 @@ async function UserPage({ params }) {
       <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6 p-4">
         {page.links.map((link) => (
           <Link
-            ping={process.env.URL + "api/click?url=" + btoa(link.url)}
+            ping={
+              process.env.URL +
+              "api/click?url=" +
+              btoa(link.url) +
+              "&page=" +
+              page.uri
+            }
             href={link.url}
             target="_blank"
             className="bg-indigo-800 flex p-2"

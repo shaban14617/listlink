@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faLink } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 const inter = Lato({ subsets: ["latin"], weight: ["400", "700"] });
@@ -29,12 +29,25 @@ export default async function AppLayout({ children, ...rest }) {
   }
   mongoose.connect(process.env.MONGODB_URI);
   const page = await Page.findOne({ owner: session.user.email });
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <Toaster />
-        <main className="flex min-h-screen">
-          <aside className=" bg-white w-48 p-4 pt-6 shadow-md">
+        <main className="md:flex min-h-screen">
+          <label
+            htmlFor="navCB"
+            className="cursor-pointer md:hidden ml-8 mt-4 inline-flex shadow p-4 rounded md bg-white items-center gap-2"
+          >
+            <FontAwesomeIcon icon={faBars} />
+            <span>Menu</span>
+          </label>
+          <input id="navCB" type="checkbox" className="hidden" />
+          <label
+            htmlFor="navCB"
+            className="hidden backdrop fixed inset-0 bg-black/80 z-10"
+          ></label>
+          <aside className=" bg-white w-48 p-4 pt-6 shadow-md fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
             <div className="sticky top-0 pt-2">
               <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto">
                 <Image
@@ -49,15 +62,15 @@ export default async function AppLayout({ children, ...rest }) {
                   <Link
                     target="_blank"
                     href={"/" + page.uri}
-                    className=" text-center mt-4 flex gap-2 items-center justify-center"
+                    className=" text-center mt-4 flex gap-1 items-center justify-center"
                   >
                     <FontAwesomeIcon
-                      size="lg "
+                      size="lg"
                       className="text-blue-500"
                       icon={faLink}
                     />
                     <span className="text-lg text-gray-500">/</span>
-                    <span className="font-bold">{page.uri}</span>
+                    <span className="font-bold ">{page.uri}</span>
                   </Link>
                 )}
               </div>

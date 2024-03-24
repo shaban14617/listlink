@@ -35,11 +35,23 @@ function HeroForm({ user }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="inline-flex gap items-center shadow shadow-gray-700/20"
+      className="inline-flex gap items-center bg-white shadow shadow-gray-700/20"
     >
-      <span className="bg-white py-4 pl-4">Linklist.to/</span>
-      <input type="text" placeholder="username" className="py-4" />
-      <button type="submit" className="bg-blue-500 text-white py-4 px-6">
+      <span className="bg-white py-4 pl-4 ">Linklist.to/</span>
+      <input
+        type="text"
+        placeholder="username"
+        className=""
+        style={{
+          backgroundColor: "white",
+          marginBottom: 0,
+          paddingLeft: 0,
+        }}
+      />
+      <button
+        type="submit"
+        className="bg-blue-500 text-white py-4 px-6 whitespace-nowrap"
+      >
         join for free
       </button>
     </form>

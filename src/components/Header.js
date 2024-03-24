@@ -18,8 +18,8 @@ async function Header() {
           </Link>
           <nav className="flex items-center gap-4 text-slate-500 text-sm">
             <Link href={"/about"}>About</Link>
-            <Link href={"pricing"}>Pricing</Link>
-            <Link href={"contact"}>Contact</Link>
+            <Link href={"/pricing"}>Pricing</Link>
+            <Link href={"/contact"}>Contact</Link>
           </nav>
         </div>
         <nav className="flex items-center gap-4 text-sm text-slate-500">

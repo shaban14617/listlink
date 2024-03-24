@@ -85,7 +85,7 @@ function PageLinksForm({ page, user }) {
           <ReactSortable handle=".handle" list={links} setList={setLinks}>
             {links.map((l) => {
               return (
-                <div key={l.key} className="mt-8 flex gap-6 items-center">
+                <div key={l.key} className="mt-8 md:flex gap-6 items-center">
                   <div className="cursor-grab handle">
                     <FontAwesomeIcon
                       className="text-gray-500 mr-2 cursor-grabbing"
@@ -123,7 +123,7 @@ function PageLinksForm({ page, user }) {
                         <button
                           onClick={() => removeLink(l.key)}
                           type="button"
-                          className="flex items-center gap-1 bg-gray-300 py-2 px-3 mx-auto"
+                          className="block w-full mb-2 items-center gap-1 bg-gray-300 py-2 px-3 mx-auto"
                         >
                           <FontAwesomeIcon icon={faTrash} />
                           <span>Remove link</span>

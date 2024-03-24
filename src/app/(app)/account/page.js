@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import PageSettingsForm from "@/components/forms/PageSettingsForm";
 import PageButtonForm from "@/components/forms/PageButtonForm";
 import PageLinksForm from "@/components/forms/PageLinksForm";
+import cloneDeep from "clone-deep";
 
 async function AccountPage({ searchParams, ...rest }) {
   const session = await getServerSession(authOptions);
@@ -18,12 +19,15 @@ async function AccountPage({ searchParams, ...rest }) {
   mongoose.connect(process.env.MONGODB_URI);
   const page = await Page.findOne({ owner: session?.user?.email });
 
+  const leanPage = cloneDeep(page.toJSON());
+  leanPage._id = leanPage._id.toString();
+
   if (page) {
     return (
       <>
-        <PageSettingsForm page={page} user={session.user} />
-        <PageButtonForm page={page} user={session.user} />
-        <PageLinksForm page={page} user={session.user} />
+        <PageSettingsForm page={leanPage} user={session.user} />
+        <PageButtonForm page={leanPage} user={session.user} />
+        <PageLinksForm page={leanPage} user={session.user} />
       </>
     );
   }

@@ -54,7 +54,7 @@ async function UserPage({ params }) {
   }
 
   return (
-    <div className="bg-blue-950 text-white min-h-screen">
+    <div className="bg-blue-950 text-white min-h-screen px-3">
       <div
         className="h-36 bg-gray-300 bg-cover bg-center "
         style={

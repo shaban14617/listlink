@@ -114,7 +114,7 @@ function PageButtonForm({ user, page }) {
         >
           {activeButtons.map((b) => {
             return (
-              <div className=" mb-4 flex items-center" key={b.label}>
+              <div className=" mb-4 md:flex items-center" key={b.label}>
                 <div className=" w-56 flex p-2 gap-2 items-center text-gray-700">
                   <FontAwesomeIcon
                     icon={faGripLines}
@@ -123,20 +123,22 @@ function PageButtonForm({ user, page }) {
                   <FontAwesomeIcon icon={b.icon} />
                   <span>{upperFirst(b.label)}:</span>
                 </div>
-                <input
-                  type="text"
-                  name={b.key}
-                  style={{ marginBottom: "0" }}
-                  placeholder={b.placeholder}
-                  defaultValue={page.buttons[b.key]}
-                />
-                <button
-                  onClick={() => removeButton(b)}
-                  type="button"
-                  className="py-2 px-4 bg-gray-300 hover:text-red-600"
-                >
-                  <FontAwesomeIcon icon={faTrash} className="" />
-                </button>
+                <div className="grow flex">
+                  <input
+                    type="text"
+                    name={b.key}
+                    style={{ marginBottom: "0" }}
+                    placeholder={b.placeholder}
+                    defaultValue={page.buttons[b.key]}
+                  />
+                  <button
+                    onClick={() => removeButton(b)}
+                    type="button"
+                    className="py-2 px-4 bg-gray-300 hover:text-red-600"
+                  >
+                    <FontAwesomeIcon icon={faTrash} className="" />
+                  </button>
+                </div>
               </div>
             );
           })}

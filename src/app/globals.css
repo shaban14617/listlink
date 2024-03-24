@@ -31,3 +31,11 @@ label.input-label {
 .sortable-ghost {
   opacity: 0.1;
 }
+
+input#navCB:checked ~ aside {
+  left: 0;
+}
+
+input#navCB:checked ~ .backdrop {
+  display: block;
+}

@@ -15,6 +15,7 @@ function RadioTogglers({ options, defaultValue, onChange }) {
           <div>
             <span>{option.label}</span>
             <FontAwesomeIcon icon={option.icon} />
+            <FontAwesomeIcon icon={option.icon} />
           </div>
         </label>
       ))}
